@@ -44,5 +44,15 @@ services:
       - jenkins
       - sonarqube
 
+  git-server:
+    build:
+      dockerfile: gitserver.Dockerfile
+      context: .
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./repos:/var/www/git
+
 volumes:
   jenkins_home: # Define a Docker volume to persist Jenkins data
