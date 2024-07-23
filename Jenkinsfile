@@ -6,7 +6,7 @@ pipeline {
         FLASK_APP = 'workspace/flask/app.py'
         PATH = "$VENV_PATH/bin:$PATH"
         SONARQUBE_SCANNER_HOME = tool name: 'SonarQube Scanner'
-        SONARQUBE_TOKEN = 'squ_3aa4db1c0709219b0de48eb1cdc1dd1b532b817b'
+        SONARQUBE_TOKEN = 'squ_c1553ca07a2e28cb613ee1a89a440b8df9f7e847'
         DEPENDENCY_CHECK_HOME = '/var/jenkins_home/tools/org.jenkinsci.plugins.DependencyCheck.tools.DependencyCheckInstallation/OWASP_Dependency-Check/dependency-check'
     }
 
@@ -20,7 +20,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 dir('workspace') {
-                    git branch: 'main', url: 'https://github.com/nickphoon/Quiz.git'
+                    git branch: 'main', url: 'https://github.com/nickphoon/SSDQUIZ.git'
                 }
             }
         }
@@ -99,7 +99,7 @@ pipeline {
                     dir('workspace/flask') {
                         sh '''
                         ${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner \
-                        -Dsonar.projectKey=flask-app \
+                        -Dsonar.projectKey=Quiz \
                         -Dsonar.sources=. \
                         -Dsonar.inclusions=app.py \
                         -Dsonar.host.url=http://sonarqube:9000 \
