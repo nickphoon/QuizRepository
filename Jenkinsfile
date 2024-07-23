@@ -108,7 +108,7 @@ pipeline {
                         sh '''
                         echo "Starting SonarQube analysis..."
                         ${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner \
-                        -Dsonar.projectKey=flask-app \
+                        -Dsonar.projectKey=Quiz \
                         -Dsonar.sources=. \
                         -Dsonar.inclusions=app.py \
                         -Dsonar.host.url=http://sonarqube:9000 \
