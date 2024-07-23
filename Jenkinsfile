@@ -50,7 +50,7 @@ pipeline {
                     sh 'mkdir -p workspace/flask/dependency-check-report'
                     sh 'echo "Dependency Check Home: $DEPENDENCY_CHECK_HOME"'
                     sh 'ls -l $DEPENDENCY_CHECK_HOME/bin'
-                    sh '${DEPENDENCY_CHECK_HOME}/bin/dependency-check.sh --project "Flask App" --scan . --format "ALL" --out workspace/flask/dependency-check-report || true'
+                    sh '${DEPENDENCY_CHECK_HOME}/bin/dependency-check.sh --project "Flask App" --scan . --format "ALL" --out workspace/flask/dependency-check-report --noupdate|| true'
                 }
             }
         }
@@ -123,7 +123,7 @@ pipeline {
                     sh 'docker ps -a --filter status=exited --filter publish=5000 --format "{{.ID}}" | xargs -r docker rm'
                     // Run the new Flask app container
                     sh 'docker run -d -p 5000:5000 flask-app'
-                    sh 'sleep 10'
+                    sh 'sleep 5'
                 }
             }
         }
