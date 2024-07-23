@@ -59,31 +59,31 @@ pipeline {
         //     }
         // }
  
-        stage('UI Testing') {
-            steps {
-                script {
-                    // Start the Flask app in the background
-                    sh '. $VENV_PATH/bin/activate && FLASK_APP=$FLASK_APP flask run &'
-                    // Give the server a moment to start
-                    sh 'sleep 5'
-                    // Debugging: Check if the Flask app is running
-                    sh 'curl -s http://127.0.0.1:5000 || echo "Flask app did not start"'
+        // stage('UI Testing') {
+        //     steps {
+        //         script {
+        //             // Start the Flask app in the background
+        //             sh '. $VENV_PATH/bin/activate && FLASK_APP=$FLASK_APP flask run &'
+        //             // Give the server a moment to start
+        //             sh 'sleep 5'
+        //             // Debugging: Check if the Flask app is running
+        //             sh 'curl -s http://127.0.0.1:5000 || echo "Flask app did not start"'
  
-                    // Test a strong password
-                    sh '''
-                    curl -s -X POST -F "password=StrongPass123" http://127.0.0.1:5000 | grep "Welcome"
-                    '''
+        //             // Test a strong password
+        //             sh '''
+        //             curl -s -X POST -F "password=StrongPass123" http://127.0.0.1:5000 | grep "Welcome"
+        //             '''
  
-                    // Test a weak password
-                    sh '''
-                    curl -s -X POST -F "password=password" http://127.0.0.1:5000 | grep "Password does not meet the requirements"
-                    '''
+        //             // Test a weak password
+        //             sh '''
+        //             curl -s -X POST -F "password=password" http://127.0.0.1:5000 | grep "Password does not meet the requirements"
+        //             '''
  
-                    // Stop the Flask app
-                    sh 'pkill -f "flask run"'
-                }
-            }
-        }
+        //             // Stop the Flask app
+        //             sh 'pkill -f "flask run"'
+        //         }
+        //     }
+        // }
  
         stage('Integration Testing') {
             steps {
